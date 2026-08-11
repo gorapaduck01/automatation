@@ -1,0 +1,29 @@
+import os
+import shutil
+import datetime
+
+# 파일명 변경할 파일들이 있는 폴더 경로 입력
+Dpath = input("경로를 입력하세요: ")
+
+print("입력 경로 확인: ",Dpath)
+
+# 당일 연도, 월 추출
+today = datetime.datetime.now().strftime("%Y_%m")
+
+for file in os.listdir(Dpath):
+    # 이미 변경된 파일은 skip
+    if file.startswith(today):
+        print(file, "은 이미 변경됨")
+        continue
+    
+    new_name = today + "_" + file
+    print(file, "→", new_name)
+
+    # 파일명 변경
+    os.rename(
+        os.path.join(Dpath,file),
+        os.path.join(Dpath,new_name)
+    )
+
+
+
